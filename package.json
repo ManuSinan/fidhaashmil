@@ -1,0 +1,8 @@
+{
+  "name": "ashmil-fidha-nikkah-landing",
+  "private": true,
+  "scripts": {
+    "start": "npx --yes serve . -l 8765",
+    "preview": "python3 -m http.server 8765"
+  }
+}
