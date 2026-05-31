@@ -1,4 +1,4 @@
-const wedding = new Date('2026-07-12T11:00:00');
+const wedding = new Date('2026-07-12T10:00:00');
 function tick(){
   const diff = wedding - new Date();
   if(diff<=0){document.querySelector('.countdown-grid').innerHTML='<p style="color:#fff;font-family:Cinzel,serif;font-size:0.85rem;letter-spacing:0.15em;padding:1.5rem;text-align:center;width:100%">Alhamdulillah — The Big Day is Here!</p>';return;}
