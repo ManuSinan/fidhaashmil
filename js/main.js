@@ -1,7 +1,9 @@
 /* ══ Theatre Curtain Overlay ══ */
 (function () {
-  const overlay = document.getElementById('curtain-overlay');
-  const hint    = document.getElementById('cv-hint');
+  const overlay   = document.getElementById('curtain-overlay');
+  const hint      = document.getElementById('cv-hint');
+  const leftPanel  = overlay && overlay.querySelector('.cv-left');
+  const rightPanel = overlay && overlay.querySelector('.cv-right');
   if (!overlay) return;
 
   /* Prevent main page from scrolling while curtain is up */
@@ -27,9 +29,12 @@
   /* Auto-open after delay */
   const autoTimer = setTimeout(openCurtains, 1500);
 
-  /* Or tap / click anywhere to open immediately */
-  overlay.addEventListener('click',      () => { clearTimeout(autoTimer); openCurtains(); }, { once: true });
-  overlay.addEventListener('touchstart', () => { clearTimeout(autoTimer); openCurtains(); }, { once: true, passive: true });
+  /* Tap ONLY on the curtain panels to open */
+  [leftPanel, rightPanel].forEach(panel => {
+    if (!panel) return;
+    panel.addEventListener('click',      () => { clearTimeout(autoTimer); openCurtains(); }, { once: true });
+    panel.addEventListener('touchstart', () => { clearTimeout(autoTimer); openCurtains(); }, { once: true, passive: true });
+  });
 })();
 
 /* ══ Countdown timer ══ */
