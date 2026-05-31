@@ -497,15 +497,15 @@ footer p {
     repeating-linear-gradient(
       90deg,
       rgba(0,0,0,0.25)  0px,  rgba(0,0,0,0.25)  3px,
-      rgba(255,255,255,0.08) 3px,  rgba(255,255,255,0.08) 7px,
+      rgba(255,255,255,0.1) 3px,  rgba(255,255,255,0.1) 7px,
       rgba(0,0,0,0)     7px,  rgba(0,0,0,0)    24px,
       rgba(0,0,0,0.15) 24px,  rgba(0,0,0,0.15) 26px,
-      rgba(255,255,255,0.05) 26px, rgba(255,255,255,0.05) 30px,
+      rgba(255,255,255,0.07) 26px, rgba(255,255,255,0.07) 30px,
       rgba(0,0,0,0)    30px,  rgba(0,0,0,0)    48px,
       rgba(0,0,0,0.1)  48px,  rgba(0,0,0,0.1)  50px,
       rgba(0,0,0,0)    50px,  rgba(0,0,0,0)    68px
     ),
-    linear-gradient(180deg, var(--green2) 0%, var(--green) 28%, #235030 60%, var(--green2) 100%);
+    linear-gradient(180deg, #6a4510 0%, #b8882a 28%, #c9a84c 55%, #a07830 80%, #6a4510 100%);
 }
 /* Outer-edge shadow (left) */
 .cv-left::before {
@@ -539,13 +539,13 @@ footer p {
       rgba(0,0,0,0)    0px,  rgba(0,0,0,0)    18px,
       rgba(0,0,0,0.1)  18px, rgba(0,0,0,0.1)  20px,
       rgba(0,0,0,0)    20px, rgba(0,0,0,0)    38px,
-      rgba(255,255,255,0.05) 38px, rgba(255,255,255,0.05) 42px,
+      rgba(255,255,255,0.07) 38px, rgba(255,255,255,0.07) 42px,
       rgba(0,0,0,0.15) 42px, rgba(0,0,0,0.15) 44px,
       rgba(0,0,0,0)    44px, rgba(0,0,0,0)    61px,
-      rgba(255,255,255,0.08) 61px, rgba(255,255,255,0.08) 65px,
+      rgba(255,255,255,0.1) 61px, rgba(255,255,255,0.1) 65px,
       rgba(0,0,0,0.25) 65px, rgba(0,0,0,0.25) 68px
     ),
-    linear-gradient(180deg, var(--green2) 0%, var(--green) 28%, #235030 60%, var(--green2) 100%);
+    linear-gradient(180deg, #6a4510 0%, #b8882a 28%, #c9a84c 55%, #a07830 80%, #6a4510 100%);
 }
 /* Gold inner trim (left edge) */
 .cv-right::before {
