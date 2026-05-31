@@ -453,3 +453,233 @@ footer p {
 .reveal.visible{opacity:1;transform:translateY(0);}
 .rd1{transition-delay:0.1s;} .rd2{transition-delay:0.2s;}
 .rd3{transition-delay:0.3s;} .rd4{transition-delay:0.4s;}
+
+/* ══════════════════════════════════
+   THEATRE CURTAIN OVERLAY
+══════════════════════════════════ */
+#curtain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: #0a1a10; /* deep backdrop visible when curtains part */
+}
+
+/* Warm spotlight glow at centre */
+.cv-spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    ellipse 65% 60% at 50% 50%,
+    rgba(242, 223, 140, 0.22) 0%,
+    rgba(201, 168, 76, 0.07) 45%,
+    transparent 72%
+  );
+  pointer-events: none;
+}
+
+/* ── Curtain Panels ── */
+.cv-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 52%; /* extra 2% to close the center gap */
+  z-index: 4;
+  will-change: transform;
+  transition: transform 1.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* LEFT panel — folds go right-to-left */
+.cv-left {
+  left: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.25)  0px,  rgba(0,0,0,0.25)  3px,
+      rgba(255,255,255,0.08) 3px,  rgba(255,255,255,0.08) 7px,
+      rgba(0,0,0,0)     7px,  rgba(0,0,0,0)    24px,
+      rgba(0,0,0,0.15) 24px,  rgba(0,0,0,0.15) 26px,
+      rgba(255,255,255,0.05) 26px, rgba(255,255,255,0.05) 30px,
+      rgba(0,0,0,0)    30px,  rgba(0,0,0,0)    48px,
+      rgba(0,0,0,0.1)  48px,  rgba(0,0,0,0.1)  50px,
+      rgba(0,0,0,0)    50px,  rgba(0,0,0,0)    68px
+    ),
+    linear-gradient(180deg, #162d1e 0%, #2e6640 28%, #245530 60%, #162d1e 100%);
+}
+/* Outer-edge shadow (left) */
+.cv-left::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 40px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.4), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+/* Gold inner trim (right edge) */
+.cv-left::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 16px;
+  background: linear-gradient(90deg,
+    #6a4510 0%, #b8882a 25%,
+    #f0d870 50%, #c9a84c 75%, #8a6520 100%);
+  box-shadow: inset -3px 0 8px rgba(0,0,0,0.35);
+  z-index: 5;
+}
+
+/* RIGHT panel — folds go left-to-right */
+.cv-right {
+  right: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0)    0px,  rgba(0,0,0,0)    18px,
+      rgba(0,0,0,0.1)  18px, rgba(0,0,0,0.1)  20px,
+      rgba(0,0,0,0)    20px, rgba(0,0,0,0)    38px,
+      rgba(255,255,255,0.05) 38px, rgba(255,255,255,0.05) 42px,
+      rgba(0,0,0,0.15) 42px, rgba(0,0,0,0.15) 44px,
+      rgba(0,0,0,0)    44px, rgba(0,0,0,0)    61px,
+      rgba(255,255,255,0.08) 61px, rgba(255,255,255,0.08) 65px,
+      rgba(0,0,0,0.25) 65px, rgba(0,0,0,0.25) 68px
+    ),
+    linear-gradient(180deg, #162d1e 0%, #2e6640 28%, #245530 60%, #162d1e 100%);
+}
+/* Gold inner trim (left edge) */
+.cv-right::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 16px;
+  background: linear-gradient(90deg,
+    #8a6520 0%, #c9a84c 25%,
+    #f0d870 50%, #b8882a 75%, #6a4510 100%);
+  box-shadow: inset 3px 0 8px rgba(0,0,0,0.35);
+  z-index: 5;
+}
+/* Outer-edge shadow (right) */
+.cv-right::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 40px;
+  background: linear-gradient(270deg, rgba(0,0,0,0.4), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Open state — curtains sweep outward ── */
+#curtain-overlay.cv-open .cv-left  { transform: translateX(-101%); }
+#curtain-overlay.cv-open .cv-right { transform: translateX(101%);  }
+
+/* ── Fade out ── */
+#curtain-overlay.cv-fade {
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+
+/* ── Valance (top decorative strip) ── */
+.cv-valance {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 96px;
+  z-index: 6;
+  background: linear-gradient(180deg, #0a1a10 0%, #182d1e 50%, #1e3d28 100%);
+  border-bottom: 2.5px solid var(--gold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+}
+/* Fringe hanging from valance bottom */
+.cv-valance::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: 0; right: 0;
+  height: 30px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--gold)  0px, var(--gold)  4px,
+      transparent  4px, transparent  14px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent  0px,  transparent  2px,
+      var(--gold3) 2px,  var(--gold3)  6px,
+      transparent  6px,  transparent  14px
+    );
+  pointer-events: none;
+  z-index: 7;
+}
+.cv-bism {
+  font-size: 1.35rem;
+  color: var(--gold3);
+  line-height: 1.2;
+  margin: 0 0 1px;
+}
+.cv-val-names {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: var(--gold4);
+  line-height: 1;
+  margin: 0;
+}
+.cv-amp {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--gold3);
+}
+.cv-val-sub {
+  font-family: 'Cinzel', serif;
+  font-size: 0.46rem;
+  letter-spacing: 0.24em;
+  color: rgba(201,168,76,0.65);
+  margin: 2px 0 0;
+}
+
+/* ── Gold center seam ── */
+.cv-seam {
+  position: absolute;
+  left: 50%;
+  top: 96px;
+  bottom: 0;
+  width: 4px;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: linear-gradient(180deg,
+    var(--gold) 0%,
+    rgba(201,168,76,0.4) 40%,
+    transparent 100%);
+  pointer-events: none;
+}
+
+/* ── Tap hint ── */
+.cv-hint {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--gold3);
+  white-space: nowrap;
+  animation: cv-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+  text-shadow: 0 0 12px rgba(201,168,76,0.5);
+}
+@keyframes cv-pulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 1;    }
+}
+

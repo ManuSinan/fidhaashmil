@@ -1,3 +1,38 @@
+/* ══ Theatre Curtain Overlay ══ */
+(function () {
+  const overlay = document.getElementById('curtain-overlay');
+  const hint    = document.getElementById('cv-hint');
+  if (!overlay) return;
+
+  /* Prevent main page from scrolling while curtain is up */
+  document.body.style.overflow = 'hidden';
+
+  let opened = false;
+
+  function openCurtains() {
+    if (opened) return;
+    opened = true;
+    /* Hide tap hint immediately */
+    if (hint) hint.style.opacity = '0';
+    /* Trigger curtain sweep */
+    overlay.classList.add('cv-open');
+    /* Restore scroll partway through so content is ready */
+    setTimeout(() => { document.body.style.overflow = ''; }, 1000);
+    /* Fade overlay once curtains are fully open */
+    setTimeout(() => overlay.classList.add('cv-fade'), 1950);
+    /* Remove overlay from DOM after fade */
+    setTimeout(() => overlay.remove(), 2700);
+  }
+
+  /* Auto-open after delay */
+  const autoTimer = setTimeout(openCurtains, 1500);
+
+  /* Or tap / click anywhere to open immediately */
+  overlay.addEventListener('click',      () => { clearTimeout(autoTimer); openCurtains(); }, { once: true });
+  overlay.addEventListener('touchstart', () => { clearTimeout(autoTimer); openCurtains(); }, { once: true, passive: true });
+})();
+
+/* ══ Countdown timer ══ */
 const wedding = new Date('2026-07-12T10:30:00');
 function tick(){
   const diff = wedding - new Date();
