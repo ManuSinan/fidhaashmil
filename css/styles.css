@@ -462,7 +462,7 @@ footer p {
   inset: 0;
   z-index: 9999;
   overflow: hidden;
-  background: #0a1a10; /* deep backdrop visible when curtains part */
+  background: var(--ivory); /* wedding cream backdrop revealed when curtains part */
 }
 
 /* Warm spotlight glow at centre */
@@ -505,7 +505,7 @@ footer p {
       rgba(0,0,0,0.1)  48px,  rgba(0,0,0,0.1)  50px,
       rgba(0,0,0,0)    50px,  rgba(0,0,0,0)    68px
     ),
-    linear-gradient(180deg, #162d1e 0%, #2e6640 28%, #245530 60%, #162d1e 100%);
+    linear-gradient(180deg, var(--green2) 0%, var(--green) 28%, #235030 60%, var(--green2) 100%);
 }
 /* Outer-edge shadow (left) */
 .cv-left::before {
@@ -545,7 +545,7 @@ footer p {
       rgba(255,255,255,0.08) 61px, rgba(255,255,255,0.08) 65px,
       rgba(0,0,0,0.25) 65px, rgba(0,0,0,0.25) 68px
     ),
-    linear-gradient(180deg, #162d1e 0%, #2e6640 28%, #245530 60%, #162d1e 100%);
+    linear-gradient(180deg, var(--green2) 0%, var(--green) 28%, #235030 60%, var(--green2) 100%);
 }
 /* Gold inner trim (left edge) */
 .cv-right::before {
@@ -589,8 +589,11 @@ footer p {
   right: 0;
   height: 96px;
   z-index: 6;
-  background: linear-gradient(180deg, #0a1a10 0%, #182d1e 50%, #1e3d28 100%);
+  /* Cream card — matches the wedding invitation card */
+  background: linear-gradient(160deg, #fdf8ef 0%, #f5ece0 55%, #f0e2d0 100%);
+  border-top: none;
   border-bottom: 2.5px solid var(--gold);
+  box-shadow: 0 4px 24px rgba(42,31,14,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -621,14 +624,14 @@ footer p {
 }
 .cv-bism {
   font-size: 1.35rem;
-  color: var(--gold3);
+  color: var(--gold2); /* matches wedding gold on cream */
   line-height: 1.2;
   margin: 0 0 1px;
 }
 .cv-val-names {
   font-family: 'Great Vibes', cursive;
   font-size: 2rem;
-  color: var(--gold4);
+  color: var(--green); /* matches wedding dark green */
   line-height: 1;
   margin: 0;
 }
@@ -636,13 +639,13 @@ footer p {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.1rem;
   font-style: italic;
-  color: var(--gold3);
+  color: var(--gold);
 }
 .cv-val-sub {
   font-family: 'Cinzel', serif;
   font-size: 0.46rem;
   letter-spacing: 0.24em;
-  color: rgba(201,168,76,0.65);
+  color: var(--gold2);
   margin: 2px 0 0;
 }
 
@@ -672,14 +675,13 @@ footer p {
   font-family: 'Cinzel', serif;
   font-size: 0.6rem;
   letter-spacing: 0.3em;
-  color: var(--gold3);
+  color: var(--brown); /* visible on cream backdrop */
   white-space: nowrap;
   animation: cv-pulse 2s ease-in-out infinite;
   pointer-events: none;
-  text-shadow: 0 0 12px rgba(201,168,76,0.5);
 }
 @keyframes cv-pulse {
-  0%, 100% { opacity: 0.35; }
-  50%       { opacity: 1;    }
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.85; }
 }
 
