@@ -1,7 +1,6 @@
 /* ══ Theatre Curtain Overlay ══ */
 (function () {
-  const overlay   = document.getElementById('curtain-overlay');
-  const hint      = document.getElementById('cv-hint');
+  const overlay    = document.getElementById('curtain-overlay');
   const leftPanel  = overlay && overlay.querySelector('.cv-left');
   const rightPanel = overlay && overlay.querySelector('.cv-right');
   if (!overlay) return;
@@ -14,8 +13,6 @@
   function openCurtains() {
     if (opened) return;
     opened = true;
-    /* Hide tap hint immediately */
-    if (hint) hint.style.opacity = '0';
     /* Trigger curtain sweep */
     overlay.classList.add('cv-open');
     /* Restore scroll partway through so content is ready */
