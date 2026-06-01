@@ -1,16 +1,16 @@
 :root {
-  --ivory: #f5efe2;
-  --ivory2: #f0e8d5;
-  --ivory3: #ede0ca;
-  --gold: #c9a84c;
-  --gold2: #a8782a;
-  --gold3: #e8cc78;
-  --gold4: #f2dfa0;
+  --ivory: #f7f3e8;
+  --ivory2: #f2ebd9;
+  --ivory3: #ebe1c7;
+  --gold: #af8f56;
+  --gold2: #8c6c35;
+  --gold3: #d9c5a3;
+  --gold4: #ebdcb9;
   --green: #2a5a38;
   --green2: #1e4229;
-  --brown: #5a3e22;
-  --text: #2a1f0e;
-  --textmid: #5a3e22;
+  --brown: #8c6c35;
+  --text: #3c3022;
+  --textmid: #5c4a37;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -165,9 +165,11 @@ body {
   position: relative;
 }
 .cd-script {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2rem;
-  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--gold);
   margin-bottom: 1.8rem;
   position: relative;
 }
@@ -241,7 +243,14 @@ body {
 .sec-hd{text-align:center;margin-bottom:1.8rem;}
 .sec-eye{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.35em;
   color:var(--gold2);margin-bottom:0.4rem;}
-.sec-ttl{font-family:'Great Vibes',cursive;font-size:2.4rem;color:var(--text);}
+.sec-ttl {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
 .sec-orn{display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:0.5rem;}
 .sec-orn .ol{width:50px;height:1px;background:var(--gold3);}
 .sec-orn .od{width:5px;height:5px;transform:rotate(45deg);background:var(--gold);}
@@ -404,8 +413,15 @@ body {
 .cl-cite{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.2em;
   color:var(--gold2);margin-bottom:1.8rem;}
 .cl-arch{margin:1.5rem auto;}
-.cl-script{font-family:'Great Vibes',cursive;font-size:2.6rem;color:var(--gold2);
-  margin-bottom:0.3rem;}
+.cl-script {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--gold2);
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.02em;
+}
 .cl-amp{color:var(--gold);}
 .cl-sub{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.24em;
   color:var(--gold2);margin-bottom:1rem;}
@@ -420,8 +436,15 @@ body {
   background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .dua-box p{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;
   color:var(--text);line-height:1.9;}
-.dua-aameen{display:block;margin-top:0.5rem;font-family:'Great Vibes',cursive;
-  font-size:1.8rem;font-style:normal;color:var(--gold2);}
+.dua-aameen {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--gold2);
+}
 
 /* FOOTER */
 footer {
