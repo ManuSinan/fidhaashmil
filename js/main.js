@@ -16,63 +16,27 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 /* ── 3D Envelope Opening Animation Orchestration ── */
 const envelopeContainer = document.getElementById('envelope-container');
-const card = document.getElementById('letter-card');
-const envelope = document.getElementById('envelope');
-
-function calculateCardTransform() {
-  const heroImg = document.querySelector('.hero-poster__img');
-  if (heroImg && card && envelope && envelopeContainer) {
-    const heroRect = heroImg.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-    const envelopeRect = envelope.getBoundingClientRect();
-    
-    // The target width of the card is the hero image width
-    const targetWidth = heroRect.width;
-    const scale = targetWidth / cardRect.width;
-    
-    // Compute card's initial viewport top position
-    const cardStyleTop = parseFloat(window.getComputedStyle(card).top) || 16;
-    const cardInitialViewportTop = envelopeRect.top + cardStyleTop;
-    
-    // The hero image's viewport top is 0 (since scroll is locked at 0)
-    const targetViewportTop = heroRect.top;
-    
-    // With transform-origin: top center, translateY is the distance from card's initial viewport top to target viewport top
-    const translateY = targetViewportTop - cardInitialViewportTop;
-    
-    envelopeContainer.style.setProperty('--card-translate-y', `${translateY}px`);
-    envelopeContainer.style.setProperty('--card-scale', `${scale}`);
-  }
-}
-
-// Calculate on load and resize
-window.addEventListener('load', calculateCardTransform);
-window.addEventListener('resize', calculateCardTransform);
 
 if (envelopeContainer) {
   envelopeContainer.addEventListener('click', () => {
     // Prevent double triggers
     if (envelopeContainer.classList.contains('open')) return;
     
-    // Recalculate layout metrics right before animation to be perfectly accurate
-    calculateCardTransform();
-    
     envelopeContainer.classList.add('open');
     
     // Coordination of transitions:
     // 1. Seal fades/scales to 0 (0s -> 0.4s)
     // 2. Top flap opens/rotates 180deg (0.4s -> 1.1s)
-    // 3. Inner card slides upwards, rotates, and scales to fit the hero image (1.0s -> 2.2s)
     
-    // Step 4: Fade out the entire envelope container to reveal the identical hero card underneath (takes 0.6s)
+    // Step 3: Fade out the entire envelope container to reveal the webpage underneath (takes 0.8s)
     setTimeout(() => {
       envelopeContainer.classList.add('fade-out');
-    }, 2200);
+    }, 1100);
     
-    // Step 5: Clean up after fade-out is fully complete (2.2s + 0.6s = 2.8s)
+    // Step 4: Clean up after fade-out is fully complete (1.1s + 0.8s = 1.9s)
     setTimeout(() => {
       envelopeContainer.style.display = 'none';
       document.body.classList.remove('no-scroll');
-    }, 2800);
+    }, 1900);
   });
 }
