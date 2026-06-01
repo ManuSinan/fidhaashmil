@@ -507,14 +507,14 @@ footer p {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--ivory); /* Off-white/ivory background */
+  background: radial-gradient(circle at center, #faf6ee 0%, #ebe1c7 100%); /* Premium radial gradient spotlight */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 2.5rem;
   overflow: hidden;
-  transition: opacity 0.6s ease, visibility 0.6s, background-color 1.0s ease 1.0s;
+  transition: opacity 0.8s ease, visibility 0.8s, background-color 1.2s ease 1.0s;
 }
 
 .envelope-container.open {
@@ -522,8 +522,47 @@ footer p {
   pointer-events: none;
 }
 
+/* Corner Ornaments */
+.corner-ornament {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  border: 1px solid rgba(175, 143, 86, 0.25);
+  pointer-events: none;
+  transition: opacity 0.8s ease 1.0s;
+  z-index: 10000;
+}
+.corner-ornament.top-left {
+  top: 30px;
+  left: 30px;
+  border-right: none;
+  border-bottom: none;
+}
+.corner-ornament.top-right {
+  top: 30px;
+  right: 30px;
+  border-left: none;
+  border-bottom: none;
+}
+.corner-ornament.bottom-left {
+  bottom: 30px;
+  left: 30px;
+  border-right: none;
+  border-top: none;
+}
+.corner-ornament.bottom-right {
+  bottom: 30px;
+  right: 30px;
+  border-left: none;
+  border-top: none;
+}
+
+.envelope-container.open .corner-ornament {
+  opacity: 0;
+}
+
 .envelope-wrapper {
-  perspective: 1000px;
+  perspective: 1200px;
   width: 280px;
   height: 400px;
   display: flex;
@@ -535,22 +574,24 @@ footer p {
   position: relative;
   width: 100%;
   height: 100%;
-  background: transparent; /* transparent, we use separate back face */
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15); /* softer shadow for light theme */
+  background: transparent;
+  box-shadow: 0 20px 50px rgba(175, 143, 86, 0.15); /* elegant warm shadow */
   transform-style: preserve-3d;
   cursor: pointer;
   transition: box-shadow 0.8s ease 1.0s;
 }
 
 .envelope-container.open .envelope {
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0); /* fade out shadow */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0);
 }
 
 /* Back Face */
 .envelope-back {
   position: absolute;
   inset: 0;
-  background: var(--ivory3); /* slightly darker ivory for interior contrast */
+  background: var(--ivory3);
+  border: 1px solid rgba(175, 143, 86, 0.15);
+  box-shadow: inset 0 0 25px rgba(175, 143, 86, 0.1);
   z-index: 1;
   transition: opacity 0.8s ease 1.0s;
 }
@@ -570,17 +611,27 @@ footer p {
   left: 0;
   width: 100%;
   height: 180px;
-  background: #fdfcfb; /* Premium off-white paper */
+  background: #fdfcfb;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
-  transition: transform 0.6s ease 0.4s, z-index 0s step-end 1.0s, opacity 0.8s ease 1.0s;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s, z-index 0s step-end 1.0s, opacity 0.8s ease 1.0s;
   z-index: 4; /* covers card initially */
+  overflow: hidden;
+}
+
+.top-flap-liner {
+  position: absolute;
+  inset: 0;
+  background: #f5efe1; /* gold interior shade */
+  background-image: repeating-linear-gradient(45deg, rgba(175, 143, 86, 0.06) 0px, rgba(175, 143, 86, 0.06) 1px, transparent 1px, transparent 10px);
+  opacity: 0.9;
+  transform: rotate(180deg); /* flips the pattern back */
 }
 
 .envelope-container.open .top-flap {
   transform: rotateX(180deg);
   opacity: 0;
-  z-index: 1; /* goes behind letter card once open */
+  z-index: 1;
 }
 
 .left-flap {
@@ -588,7 +639,7 @@ footer p {
   left: 0;
   width: 142px;
   height: 100%;
-  background: #f5efe1; /* slightly shaded cream */
+  background: #f5efe1;
   clip-path: polygon(0 0, 0 100%, 100% 50%);
   z-index: 3;
   transition: opacity 0.8s ease 1.0s;
@@ -603,7 +654,7 @@ footer p {
   right: 0;
   width: 142px;
   height: 100%;
-  background: #f5efe1; /* slightly shaded cream */
+  background: #f5efe1;
   clip-path: polygon(100% 0, 100% 100%, 0 50%);
   z-index: 3;
   transition: opacity 0.8s ease 1.0s;
@@ -618,7 +669,7 @@ footer p {
   left: 0;
   width: 100%;
   height: 220px;
-  background: #faf6ec; /* soft light cream */
+  background: #faf6ec;
   clip-path: polygon(0 100%, 100% 100%, 50% 0);
   z-index: 3;
   transition: opacity 0.8s ease 1.0s;
@@ -631,15 +682,14 @@ footer p {
 /* Inner Letter Card */
 .letter-card {
   position: absolute;
-  top: 16px; /* centered vertically: (400 - 368) / 2 */
+  top: 16px;
   left: 10px;
   width: 260px;
-  height: 368px; /* matching the 0.706 aspect ratio */
+  height: 368px;
   background: #fff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  z-index: 2; /* behind flaps, in front of back-face */
-  transform-origin: top center; /* critical for dynamic scaling */
-  transition: transform 1.0s cubic-bezier(0.25, 1, 0.5, 1) 1.0s, box-shadow 1.0s ease 1.0s;
+  box-shadow: 0 4px 20px rgba(175, 143, 86, 0.1);
+  z-index: 2;
+  transform-origin: top center;
 }
 
 .letter-card img {
@@ -649,8 +699,28 @@ footer p {
   display: block;
 }
 
-/* Seashell Wax Seal */
-.wax-seal {
+.envelope-container.open .letter-card {
+  animation: card-slide-out 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 1.0s forwards;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0);
+}
+
+@keyframes card-slide-out {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  35% {
+    transform: translateY(calc(var(--card-translate-y, -85%) * 0.45)) scale(calc(1 + (var(--card-scale, 1) - 1) * 0.35)) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(calc(var(--card-translate-y, -85%) * 0.85)) scale(calc(1 + (var(--card-scale, 1) - 1) * 0.85)) rotate(0.6deg);
+  }
+  100% {
+    transform: translateY(var(--card-translate-y, -85%)) scale(var(--card-scale, 1)) rotate(0deg);
+  }
+}
+
+/* Seashell Wax Seal & Ripples */
+.wax-seal-wrapper {
   position: absolute;
   top: 200px;
   left: 140px;
@@ -659,31 +729,63 @@ footer p {
   transform: translate(-50%, -50%);
   z-index: 5;
   cursor: pointer;
-  transition: transform 0.4s ease, opacity 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
 }
 
-/* Animation triggers */
-.envelope-container.open .wax-seal {
+.wax-seal {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ripple-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  opacity: 0;
+  pointer-events: none;
+  animation: ripple 2.5s infinite cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+
+.ripple-ring.delay-1 {
+  animation-delay: 1.25s;
+}
+
+@keyframes ripple {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.envelope-container.open .wax-seal-wrapper {
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
 }
 
-.envelope-container.open .letter-card {
-  transform: translateY(var(--card-translate-y, -85%)) scale(var(--card-scale, 1));
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0); /* fade out shadow on scale */
-}
-
-/* Hint Text */
+/* Hint Text with flanking gold lines */
 .tap-hint {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
   font-family: 'Cinzel', serif;
   font-size: 0.72rem;
-  letter-spacing: 0.3em;
-  color: var(--gold3);
+  letter-spacing: 0.4em;
+  color: var(--gold);
   text-transform: uppercase;
   animation: pulse-text-hint 2s infinite ease-in-out;
   cursor: pointer;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
   transition: opacity 0.4s ease;
+}
+
+.hint-line {
+  width: 35px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
 .envelope-container.open .tap-hint {

@@ -61,18 +61,18 @@ if (envelopeContainer) {
     
     // Coordination of transitions:
     // 1. Seal fades/scales to 0 (0s -> 0.4s)
-    // 2. Top flap opens/rotates 180deg (0.4s -> 1.0s)
-    // 3. Inner card slides upwards and scales to fit the hero image (1.0s -> 2.0s)
+    // 2. Top flap opens/rotates 180deg (0.4s -> 1.1s)
+    // 3. Inner card slides upwards, rotates, and scales to fit the hero image (1.0s -> 2.2s)
     
     // Step 4: Fade out the entire envelope container to reveal the identical hero card underneath (takes 0.6s)
     setTimeout(() => {
       envelopeContainer.classList.add('fade-out');
-    }, 2000);
+    }, 2200);
     
-    // Step 5: Clean up after fade-out is fully complete (2.0s + 0.6s = 2.6s)
+    // Step 5: Clean up after fade-out is fully complete (2.2s + 0.6s = 2.8s)
     setTimeout(() => {
       envelopeContainer.style.display = 'none';
       document.body.classList.remove('no-scroll');
-    }, 2600);
+    }, 2800);
   });
 }
