@@ -423,6 +423,28 @@ body {
   letter-spacing: 0.02em;
 }
 .cl-amp{color:var(--gold);}
+.cl-parentage {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--textmid);
+  line-height: 1.6;
+  margin: 0.8rem 0 1.4rem;
+}
+.cl-parentage span {
+  display: block;
+}
+.cl-parentage .parent-note {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  display: block;
+  margin-top: 0.1rem;
+}
+.cl-parentage .parent-amp {
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin: 0.2rem 0;
+}
 .cl-sub{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.24em;
   color:var(--gold2);margin-bottom:1rem;}
 .cl-body{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;
