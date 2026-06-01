@@ -507,14 +507,19 @@ footer p {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #0d1a10; /* Dark forest green background */
+  background: var(--ivory); /* Off-white/ivory background */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2rem;
   overflow: hidden;
-  transition: opacity 0.6s ease, visibility 0.6s;
+  transition: opacity 0.6s ease, visibility 0.6s, background-color 1.0s ease 1.0s;
+}
+
+.envelope-container.open {
+  background-color: rgba(247, 243, 232, 0); /* fades to transparent starting at 1.0s */
+  pointer-events: none;
 }
 
 .envelope-wrapper {
@@ -531,7 +536,7 @@ footer p {
   width: 100%;
   height: 100%;
   background: transparent; /* transparent, we use separate back face */
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15); /* softer shadow for light theme */
   transform-style: preserve-3d;
   cursor: pointer;
   transition: box-shadow 0.8s ease 1.0s;
@@ -545,7 +550,7 @@ footer p {
 .envelope-back {
   position: absolute;
   inset: 0;
-  background: #08120a; /* Darkest forest green back face */
+  background: var(--ivory3); /* slightly darker ivory for interior contrast */
   z-index: 1;
   transition: opacity 0.8s ease 1.0s;
 }
@@ -565,7 +570,7 @@ footer p {
   left: 0;
   width: 100%;
   height: 180px;
-  background: #1d3e26; /* Deep forest green */
+  background: #fdfcfb; /* Premium off-white paper */
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
   transition: transform 0.6s ease 0.4s, z-index 0s step-end 1.0s, opacity 0.8s ease 1.0s;
@@ -583,7 +588,7 @@ footer p {
   left: 0;
   width: 142px;
   height: 100%;
-  background: #152e1c; /* Medium deep forest green */
+  background: #f5efe1; /* slightly shaded cream */
   clip-path: polygon(0 0, 0 100%, 100% 50%);
   z-index: 3;
   transition: opacity 0.8s ease 1.0s;
@@ -598,7 +603,7 @@ footer p {
   right: 0;
   width: 142px;
   height: 100%;
-  background: #152e1c; /* Medium deep forest green */
+  background: #f5efe1; /* slightly shaded cream */
   clip-path: polygon(100% 0, 100% 100%, 0 50%);
   z-index: 3;
   transition: opacity 0.8s ease 1.0s;
@@ -613,7 +618,7 @@ footer p {
   left: 0;
   width: 100%;
   height: 220px;
-  background: #1b3b24; /* Slightly lighter deep green */
+  background: #faf6ec; /* soft light cream */
   clip-path: polygon(0 100%, 100% 100%, 50% 0);
   z-index: 3;
   transition: opacity 0.8s ease 1.0s;
