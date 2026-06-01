@@ -13,3 +13,51 @@ tick(); setInterval(tick,1000);
 
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ══ Interactive Video Curtain ══ */
+const playOverlay = document.getElementById('play-overlay');
+const heroVideo = document.getElementById('hero-video');
+
+let videoEnded = false;
+
+// Start unmuted when user initiates interaction
+if (heroVideo) {
+  heroVideo.muted = false;
+  
+  // Prevent replay once video ends
+  heroVideo.addEventListener('ended', () => {
+    videoEnded = true;
+  });
+}
+
+if (playOverlay && heroVideo) {
+  playOverlay.addEventListener('click', () => {
+    if (!playOverlay.classList.contains('opened')) {
+      playOverlay.classList.add('opened');
+      
+      // Play video with audio
+      heroVideo.play().catch(err => {
+        console.warn('Playback failed. Retrying muted...', err);
+        heroVideo.muted = true;
+        heroVideo.play().catch(e => console.error('Muted playback failed:', e));
+      });
+
+      // Disable interaction on play overlay after it fades out
+      setTimeout(() => {
+        playOverlay.style.pointerEvents = 'none';
+      }, 800);
+    }
+  });
+
+  // Tap video to play/pause after opened (only if it hasn't ended)
+  heroVideo.addEventListener('click', () => {
+    if (playOverlay.classList.contains('opened') && !videoEnded) {
+      if (heroVideo.paused) {
+        heroVideo.play().catch(e => console.error(e));
+      } else {
+        heroVideo.pause();
+      }
+    }
+  });
+}
+

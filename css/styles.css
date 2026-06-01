@@ -28,7 +28,7 @@ body {
 ══════════════════════════════════ */
 #hero {
   position: relative;
-  background: var(--ivory);
+  background: #0a0a0a;
   line-height: 0;
 }
 
@@ -36,91 +36,146 @@ body {
   position: relative;
   margin: 0;
   width: 100%;
+  aspect-ratio: 9 / 16;
   overflow: hidden;
+  background: #000;
 }
 
-.hero-poster__img {
+.hero-video {
   display: block;
   width: 100%;
-  height: auto;
-  vertical-align: top;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* ── Animated hanging lanterns ── */
-.hero-lantern {
+/* ── Play Overlay ── */
+.play-overlay {
   position: absolute;
-  top: 0;
-  z-index: 2;
+  inset: 0;
+  z-index: 5;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('../assets/images/fidusas.jpeg') no-repeat center / cover;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.play-overlay.opened {
+  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transform-origin: top center;
-  width: clamp(52px, 14vw, 68px);
-  line-height: 0;
 }
 
-.hero-lantern--left {
-  left: clamp(10px, 3.5vw, 18px);
-  animation: lantern-sway-left 5.5s ease-in-out infinite;
+/* ── Play Trigger Button ── */
+.play-trigger-wrap {
+  position: absolute;
+  z-index: 6;
+  text-align: center;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  pointer-events: none;
 }
 
-.hero-lantern--right {
-  right: clamp(10px, 3.5vw, 18px);
-  animation: lantern-sway-right 6s ease-in-out infinite;
+.play-overlay.opened .play-trigger-wrap {
+  opacity: 0;
+  transform: scale(0.9);
 }
 
-.hero-lantern__svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  animation: lantern-glow 3.5s ease-in-out infinite;
+.play-trigger {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  animation: pulse-text 2s infinite ease-in-out;
 }
 
-@keyframes lantern-sway-left {
-  0%, 100% { transform: rotate(-4deg); }
-  50%      { transform: rotate(4deg); }
+.play-trigger__icon {
+  font-size: 1.1rem;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  margin-bottom: 2px;
 }
 
-@keyframes lantern-sway-right {
-  0%, 100% { transform: rotate(4deg); }
-  50%      { transform: rotate(-4deg); }
+.play-trigger__text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  color: #fff;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
 }
 
-@keyframes lantern-glow {
+.play-trigger__sub {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.48rem;
+  letter-spacing: 0.38em;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+@keyframes pulse-text {
   0%, 100% {
-    filter:
-      drop-shadow(0 0 4px rgba(255, 220, 100, 0.45))
-      drop-shadow(0 0 14px rgba(255, 200, 50, 0.18));
+    transform: scale(1);
+    opacity: 0.92;
   }
   50% {
-    filter:
-      drop-shadow(0 0 10px rgba(255, 220, 100, 0.75))
-      drop-shadow(0 0 24px rgba(255, 200, 50, 0.35));
+    transform: scale(1.04);
+    opacity: 1;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-lantern--left,
-  .hero-lantern--right,
-  .hero-lantern__svg {
-    animation: none;
-  }
-}
-
+/* ── Scroll Down Indicator ── */
 .hero-poster__discover {
   position: absolute;
   left: 50%;
-  bottom: 3.5%;
-  transform: translateX(-50%);
-  width: 38%;
-  height: 8%;
+  bottom: 20px;
+  transform: translateX(-50%) translateY(10px);
   border: none;
   background: transparent;
   cursor: pointer;
-  border-radius: 999px;
+  z-index: 4;
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease 1s, transform 1s ease 1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.hero-poster__discover::after {
+  content: '↓';
+  font-size: 0.95rem;
+  margin-top: 2px;
+  animation: bounce 2s infinite;
+}
+
+.play-overlay.opened ~ .hero-poster__discover {
+  opacity: 0.85;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
 }
 
 .hero-poster__discover:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
 }
 
 /* ══════════════════════════════════
