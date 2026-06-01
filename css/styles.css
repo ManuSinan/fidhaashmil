@@ -22,6 +22,9 @@ body {
   margin:0 auto;
   overflow-x:hidden;
 }
+body.no-scroll {
+  overflow: hidden;
+}
 
 /* ══════════════════════════════════
    HERO — invitation artwork
@@ -499,7 +502,173 @@ footer p {
 .rd1{transition-delay:0.1s;} .rd2{transition-delay:0.2s;}
 .rd3{transition-delay:0.3s;} .rd4{transition-delay:0.4s;}
 
-/* (tap hint removed) */
+/* ── 3D Envelope Intro ── */
+.envelope-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0d1620; /* Dark blue background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  overflow: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
 
-/* (tap hint removed) */
+.envelope-wrapper {
+  perspective: 1000px;
+  width: 280px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #0b1118; /* Darkest blue back face */
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+/* Envelope Flaps */
+.envelope .flap {
+  position: absolute;
+  pointer-events: none;
+}
+
+.top-flap {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  background: #111d29;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.6s ease 0.4s, z-index 0s step-end 1.0s;
+  z-index: 4; /* covers card initially */
+}
+
+.left-flap {
+  bottom: 0;
+  left: 0;
+  width: 142px;
+  height: 100%;
+  background: #0f1a26;
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+  z-index: 3;
+}
+
+.right-flap {
+  bottom: 0;
+  right: 0;
+  width: 142px;
+  height: 100%;
+  background: #0f1a26;
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+  z-index: 3;
+}
+
+.bottom-flap {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  background: #132130;
+  clip-path: polygon(0 100%, 100% 100%, 50% 0);
+  z-index: 3;
+}
+
+/* Inner Letter Card */
+.letter-card {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 260px;
+  height: 380px;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  z-index: 2; /* behind flaps, in front of back-face */
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 1.0s;
+}
+
+.letter-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Seashell Wax Seal */
+.wax-seal {
+  position: absolute;
+  top: 200px;
+  left: 140px;
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  cursor: pointer;
+  transition: transform 0.4s ease, opacity 0.4s;
+}
+
+/* Animation triggers */
+.envelope-container.open .wax-seal {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+.envelope-container.open .top-flap {
+  transform: rotateX(180deg);
+  z-index: 1; /* goes behind letter card once open */
+}
+
+.envelope-container.open .letter-card {
+  transform: translateY(-85%);
+}
+
+/* Hint Text */
+.tap-hint {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: #fff;
+  text-transform: uppercase;
+  animation: pulse-text-hint 2s infinite ease-in-out;
+  cursor: pointer;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.4s ease;
+}
+
+.envelope-container.open .tap-hint {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes pulse-text-hint {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+/* ── White Fade Overlay ── */
+.fade-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background: #ffffff;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+
+.fade-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
 
