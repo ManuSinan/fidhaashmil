@@ -12,6 +12,28 @@
 </head>
 <body>
 
+<!-- Envelope Intro Overlay -->
+<div id="envelope-container" class="envelope-container">
+  <video
+    id="envelope-video"
+    class="envelope-video"
+    playsinline
+    preload="auto"
+    muted
+  >
+    <source src="assets/envelope-opening.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  
+  <div class="envelope-overlay" id="envelope-overlay">
+    <button class="envelope-btn" aria-label="Open Invitation">
+      <span class="envelope-btn__text">Tap to Open</span>
+    </button>
+  </div>
+</div>
+
+<div id="fade-overlay" class="fade-overlay"></div>
+
 <section id="hero">
   <figure class="hero-poster">
     <img

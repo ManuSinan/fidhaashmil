@@ -499,7 +499,104 @@ footer p {
 .rd1{transition-delay:0.1s;} .rd2{transition-delay:0.2s;}
 .rd3{transition-delay:0.3s;} .rd4{transition-delay:0.4s;}
 
-/* (tap hint removed) */
+/* ── Envelope Intro Overlay ── */
+.envelope-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0d1620; /* Dark blue background matching the envelope paper */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
 
-/* (tap hint removed) */
+.envelope-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+@media (min-width: 481px) {
+  .envelope-video {
+    max-width: 480px;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.85);
+  }
+  .envelope-container {
+    background: #050a10;
+  }
+}
+
+.envelope-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 15%;
+  background: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+
+.envelope-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.envelope-btn {
+  background: rgba(255, 252, 245, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.95rem 2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: pulse-envelope-btn 2.2s infinite ease-in-out;
+}
+
+.envelope-btn__text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: #fff;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+@keyframes pulse-envelope-btn {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35), 0 0 0 12px rgba(255, 255, 255, 0);
+  }
+}
+
+/* ── White Fade Overlay ── */
+.fade-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background: #ffffff;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+
+.fade-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
 
