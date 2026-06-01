@@ -530,10 +530,28 @@ footer p {
   position: relative;
   width: 100%;
   height: 100%;
-  background: #08120a; /* Darkest forest green back face */
+  background: transparent; /* transparent, we use separate back face */
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
   transform-style: preserve-3d;
   cursor: pointer;
+  transition: box-shadow 0.8s ease 1.0s;
+}
+
+.envelope-container.open .envelope {
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0); /* fade out shadow */
+}
+
+/* Back Face */
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: #08120a; /* Darkest forest green back face */
+  z-index: 1;
+  transition: opacity 0.8s ease 1.0s;
+}
+
+.envelope-container.open .envelope-back {
+  opacity: 0;
 }
 
 /* Envelope Flaps */
@@ -550,8 +568,14 @@ footer p {
   background: #1d3e26; /* Deep forest green */
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top center;
-  transition: transform 0.6s ease 0.4s, z-index 0s step-end 1.0s;
+  transition: transform 0.6s ease 0.4s, z-index 0s step-end 1.0s, opacity 0.8s ease 1.0s;
   z-index: 4; /* covers card initially */
+}
+
+.envelope-container.open .top-flap {
+  transform: rotateX(180deg);
+  opacity: 0;
+  z-index: 1; /* goes behind letter card once open */
 }
 
 .left-flap {
@@ -562,6 +586,11 @@ footer p {
   background: #152e1c; /* Medium deep forest green */
   clip-path: polygon(0 0, 0 100%, 100% 50%);
   z-index: 3;
+  transition: opacity 0.8s ease 1.0s;
+}
+
+.envelope-container.open .left-flap {
+  opacity: 0;
 }
 
 .right-flap {
@@ -572,6 +601,11 @@ footer p {
   background: #152e1c; /* Medium deep forest green */
   clip-path: polygon(100% 0, 100% 100%, 0 50%);
   z-index: 3;
+  transition: opacity 0.8s ease 1.0s;
+}
+
+.envelope-container.open .right-flap {
+  opacity: 0;
 }
 
 .bottom-flap {
@@ -582,19 +616,25 @@ footer p {
   background: #1b3b24; /* Slightly lighter deep green */
   clip-path: polygon(0 100%, 100% 100%, 50% 0);
   z-index: 3;
+  transition: opacity 0.8s ease 1.0s;
+}
+
+.envelope-container.open .bottom-flap {
+  opacity: 0;
 }
 
 /* Inner Letter Card */
 .letter-card {
   position: absolute;
-  top: 10px;
+  top: 16px; /* centered vertically: (400 - 368) / 2 */
   left: 10px;
   width: 260px;
-  height: 380px;
+  height: 368px; /* matching the 0.706 aspect ratio */
   background: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   z-index: 2; /* behind flaps, in front of back-face */
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 1.0s;
+  transform-origin: top center; /* critical for dynamic scaling */
+  transition: transform 1.0s cubic-bezier(0.25, 1, 0.5, 1) 1.0s, box-shadow 1.0s ease 1.0s;
 }
 
 .letter-card img {
@@ -623,13 +663,9 @@ footer p {
   opacity: 0;
 }
 
-.envelope-container.open .top-flap {
-  transform: rotateX(180deg);
-  z-index: 1; /* goes behind letter card once open */
-}
-
 .envelope-container.open .letter-card {
-  transform: translateY(-85%);
+  transform: translateY(var(--card-translate-y, -85%)) scale(var(--card-scale, 1));
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0); /* fade out shadow on scale */
 }
 
 /* Hint Text */
@@ -655,20 +691,9 @@ footer p {
   50% { opacity: 1; transform: scale(1.03); }
 }
 
-/* ── White Fade Overlay ── */
-.fade-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10001;
-  background: #ffffff;
+.envelope-container.fade-out {
   opacity: 0;
   visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.6s ease, visibility 0.6s;
 }
 
-.fade-overlay.visible {
-  opacity: 1;
-  visibility: visible;
-}
 
