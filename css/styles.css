@@ -690,6 +690,7 @@ footer p {
   box-shadow: 0 4px 20px rgba(175, 143, 86, 0.1);
   z-index: 2;
   transform-origin: top center;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 1.0s, box-shadow 1.2s ease 1.0s;
 }
 
 .letter-card img {
@@ -700,23 +701,8 @@ footer p {
 }
 
 .envelope-container.open .letter-card {
-  animation: card-slide-out 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 1.0s forwards;
+  transform: translateY(var(--card-translate-y, -85%)) scale(var(--card-scale, 1));
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0);
-}
-
-@keyframes card-slide-out {
-  0% {
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  35% {
-    transform: translateY(calc(var(--card-translate-y, -85%) * 0.45)) scale(calc(1 + (var(--card-scale, 1) - 1) * 0.35)) rotate(-2deg);
-  }
-  75% {
-    transform: translateY(calc(var(--card-translate-y, -85%) * 0.85)) scale(calc(1 + (var(--card-scale, 1) - 1) * 0.85)) rotate(0.6deg);
-  }
-  100% {
-    transform: translateY(var(--card-translate-y, -85%)) scale(var(--card-scale, 1)) rotate(0deg);
-  }
 }
 
 /* Seashell Wax Seal & Ripples */
