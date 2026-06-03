@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "$(dirname "$0")"
-PORT=8765
+PORT=8080
 echo ""
 echo "  Nikkah landing page"
 echo "  → Open in browser: http://localhost:${PORT}"
