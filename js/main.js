@@ -33,7 +33,8 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
           setTimeout(() => tapInstruction.remove(), 500);
         }
       }).catch(err => {
-        console.error("Playback failed:", err);
+        console.error("Playback failed, bypassing intro video:", err);
+        revealInvitation();
       });
     }
   }
@@ -55,11 +56,15 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     }, 1000);
   }
 
-  // Tap anywhere on the overlay to start/play the animation
+  // Tap anywhere on the overlay to start/play the animation (click + touchstart for fast response)
   overlay.addEventListener('click', playAnimation);
+  overlay.addEventListener('touchstart', playAnimation, { passive: true });
 
   // Automatically transition when video ends
   video.addEventListener('ended', revealInvitation);
+
+  // Fallback: If video error occurs (e.g. unsupported codec), skip overlay immediately
+  video.addEventListener('error', revealInvitation);
 })();
 
 
